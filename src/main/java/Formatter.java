@@ -13,12 +13,14 @@ class Formatter {
 
         String formattedAmount = String.format("%.2f", amount);
 
-        if (intPart == 1) {
-            return formattedAmount + " рубль";
-        } else if (intPart > 1 && intPart < 5) {
-            return formattedAmount + " рубля";
-        } else {
+        int lastTwoDigits = intPart % 100;
+
+        if ((lastTwoDigits >= 11 && lastTwoDigits <= 14) || lastTwoDigits % 10 == 0 || (lastTwoDigits % 10 >= 5 && lastTwoDigits % 10 <= 9)) {
             return formattedAmount + " рублей";
+        } else if (lastTwoDigits % 10 == 1) {
+            return formattedAmount + " рубль";
+        } else {
+            return formattedAmount + " рубля";
         }
     }
 }
